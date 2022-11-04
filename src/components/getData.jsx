@@ -20,3 +20,8 @@ export const addItem = async (formdata) => {
     const response = await axios.post(url+'/add',formdata);
     return await response;
 };
+
+export const Update = async (id) => {
+    const response = await axios.put(url+'/update/'+id);
+    return await response;
+};

@@ -51,19 +51,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const MyHeader=({setTitle})=> {
-const [text,setText]=useState('')
-
-const handleChange=(e)=> {
-  console.log(e.target.value)
-  setText(e.target.value);
-}
+export const MyHeader=({isLoggedIn,setIsLoggedIn})=> {
+  const [userpw,setUserpw]=useState('')
   
 
-  const handleClick=()=> {
-    //console.log("klikk")
-    setTitle(text)
+  const handleLogin=()=> {
+    if(userpw==process.env.REACT_APP_PW)
+      setIsLoggedIn(true)
+      setUserpw('')
   };
+
+  const handleLogout=()=>{
+    setIsLoggedIn(false)
+    setUserpw('')
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -75,15 +76,21 @@ const handleChange=(e)=> {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Üdvözöllek a Todo oldalán!!
+            Welcome to my todo app
           </Typography>
           <Search>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }} onChange={handleChange}
+            <StyledInputBase type='password'
+              placeholder="Password..."
+              value={userpw}
+              inputProps={{ 'aria-label': 'search' }} 
+              onChange={(e)=>setUserpw(e.target.value)}
             />
-            <Button sx={{color:"white",border:'1px solid white'}} onClick={handleClick}>Search</Button>
-          </Search>
+            {isLoggedIn? 
+              <Button sx={{color:"white",border:'1px solid white'}} onClick={handleLogout}>Logout</Button>
+              :
+              <Button sx={{color:"white",border:'1px solid white'}} onClick={handleLogin}>Login</Button>
+            }
+            </Search>
         </Toolbar>
       </AppBar>
     </Box>

@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import ListGroup  from 'react-bootstrap/ListGroup';
-import { getTodos,delItem,delItems,addItem } from './getData';
+import { getTodos,delItem,delItems,addItem,Update } from './getData';
 import {useQuery,useQueryClient,useMutation, QueryClient} from 'react-query';
  
  
@@ -29,10 +29,17 @@ export const Todo=()=> {
       clientQuery.invalidateQueries("todos")
     }
   })
+
+  const mutationUpdate = useMutation(Update,{
+    onSuccess:()=>{
+      setNewItem('')
+      clientQuery.invalidateQueries("todos")
+    }
+  })
  
  
   return (
-    <>
+    <div className='row justify-content-center'>
     {isLoading?<p>is loading...</p>:
     <div className='todo'>
       <h1 className='text-center'>My todos</h1>
@@ -47,7 +54,7 @@ export const Todo=()=> {
         {data.data.map(item=>
         <ListGroup.Item className='d-flex justify-content-between' key={item.id}>
           <i className={item.status? "fa-solid fa-square-check text-success fa-2x":"fa-solid fa-square-check text-secondary fa-2x"} 
-          onClick={()=>console.log(item.id)}></i>
+          onClick={()=>mutationUpdate.mutate(item.id)}></i>
           <span className={item.status? "text-decoration-line-through":""}>
             {item.name}</span>
           <i className="fa-solid fa-trash text-danger fa-2x" 
@@ -58,6 +65,6 @@ export const Todo=()=> {
  
     </div>
         }
-        </>
+        </div>
   )
 }
