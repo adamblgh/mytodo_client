@@ -1,5 +1,5 @@
 import axios from "axios";
-const url="";
+const url="https://todo-server-f2kj.onrender.com";
 
 export const getTodos = async () => {
     const response = await axios.get(url+'/all');
