@@ -15,7 +15,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
     
     <MyHeader isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-    {isLoggedIn? <Todo/> : <h1 className='pt-5 text-center'>JELENTKEZZ BE A MEGTEKINTÉS ELŐTT!</h1>}
+    {isLoggedIn? <Todo /> : <h1 className='pt-5 text-center'>JELENTKEZZ BE A MEGTEKINTÉS ELŐTT!</h1>}
     </QueryClientProvider>
       
   );

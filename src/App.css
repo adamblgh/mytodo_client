@@ -10,3 +10,10 @@ i:hover{
 input{
   width: 350px;
 }
+.toltes{
+  display: flex!important;
+  justify-content: center!important;
+  align-items: center!important;
+  width: 100vw!important;
+  height: 100vh!important;
+}

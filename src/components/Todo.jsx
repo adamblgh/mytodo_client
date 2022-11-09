@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import ListGroup  from 'react-bootstrap/ListGroup';
 import { getTodos,delItem,delItems,addItem,Update } from './getData';
 import {useQuery,useQueryClient,useMutation, QueryClient} from 'react-query';
+import {MutatingDots} from 'react-loader-spinner'
  
  
 export const Todo=()=> {
@@ -40,9 +41,24 @@ export const Todo=()=> {
  
   return (
     <div className='row justify-content-center'>
-    {isLoading?<p>is loading...</p>:
+    {isLoading?
+    <div className='toltes'>
+      <MutatingDots 
+    height="100"
+    width="100"
+    color="#4fa94d"
+    secondaryColor= '#4fa94d'
+    radius='12.5'
+    ariaLabel="mutating-dots-loading"
+    wrapperStyle={{}}
+    wrapperClass=""
+    visible={true}
+   />
+    </div>
+    
+  :
     <div className='todo'>
-      <h1 className='text-center'>My todos</h1>
+      <h1 className='text-center mt-5'>My todos</h1>
       <form className='d-flex justify-content-evenly m-1 p-2'>
         <input type="text"  onChange={(e)=>setNewItem(e.target.value)} value={newItem} />
  
